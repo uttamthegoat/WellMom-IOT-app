@@ -5,28 +5,24 @@ const jwt = require('jsonwebtoken')
 
 // Controller function for user registration
 exports.registerUser = async (req, res) => {
-  const { name, phoneNumber, password } = req.body;
+  const { name, email, password } = req.body;
   console.log(req.body)
   // Validate input
-  if (name==="" || phoneNumber==="" || password==="") {
+  if (name==="" || email==="" || password==="") {
     throw new ExpressError(400, false, "All fields are required");
   }
 
   // Check if user already exists
-  const existingUser = await User.findOne({ phoneNumber });
+  const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new ExpressError(400, false, "User already exists");
   }
 
-  // Check if this is the first user
-  const isFirstUser = await User.countDocuments() === 0;
-
   // Create new user
   const newUser = new User({
     name,
-    phoneNumber,
+    email,
     password,
-    isAdmin: isFirstUser, // Set isAdmin to true if this is the first user
   });
 
   // Save user to the database
@@ -37,9 +33,9 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  const { phoneNumber, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ phoneNumber });
+  const user = await User.findOne({ email });
   if (!user) return res.status(404).json({ error: 'User not found' });
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
