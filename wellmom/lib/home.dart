@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _checkAuthentication() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('authToken');
+    final token = prefs.getString('accessToken');
     if (token == null) {
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/login');
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> logout(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('authToken');
+    await prefs.remove('accessToken');
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginPage()),
       (route) => false,

@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
       // Store the token locally
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('authToken', data['token']);
+      await prefs.setString('accessToken', data['token']);
 
       // Navigate to home page
       Navigator.pushReplacementNamed(context, '/');

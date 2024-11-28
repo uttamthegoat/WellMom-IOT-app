@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomHttpClient {
-  // final String baseUrl = 'https://elaundry-project.vercel.app/api';
-  final String baseUrl = 'http://192.168.215.211:5000/api';
+  final String baseUrl = 'https://well-mom-server.vercel.app/api';
+  // final String baseUrl = 'http://192.168.215.211:5000/api';
   final Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -12,12 +12,12 @@ class CustomHttpClient {
 
     Future<Map<String, String>> _getHeaders() async {
     final prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('authToken'); // Retrieve the saved token
+    String? token = prefs.getString('accessToken'); // Changed from 'authToken'
 
     return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      if (token != null) 'Authorization': 'Bearer $token', // Include the token if available
+      if (token != null) 'Authorization': 'Bearer $token',
     };
   }
 
