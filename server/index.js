@@ -27,6 +27,10 @@ app.use(cors(corsOptions)); // Enable CORS
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) 
 
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
+
 app.get('/api/message', (req, res) => {
   console.log("Received request for /api/message");  // Add this line
   const message = { text: "Hello from the Node.js server!" };
