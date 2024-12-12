@@ -164,6 +164,15 @@ class _HomePageState extends State<HomePage> {
                                 Colors.blue.shade100,
                               ],
                             ),
+                            _buildMetricCard(
+                              icon: Icons.golf_course,
+                              title: 'Glucose Level',
+                              value: 'Low',
+                              gradientColors: [
+                                Colors.green.shade300,
+                                Colors.green.shade100,
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -214,8 +223,8 @@ class _HomePageState extends State<HomePage> {
             Text(
               value,
               style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white70,
+                fontSize: 16,
+                color: Color.fromARGB(179, 59, 59, 59),
               ),
               textAlign: TextAlign.center,
             ),
